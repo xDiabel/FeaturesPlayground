@@ -11,6 +11,7 @@ Shader "Unlit/ScreenCutoutShader"
 		Tags{ /*"Queue" = "Transparent" "IgnoreProjector" = "True"*/ "RenderType" = "Opaque" }
 		//Lighting Off
 		Cull Off
+		Offset -1,-1
 		//ZWrite On
 		//ZTest Less
 		
