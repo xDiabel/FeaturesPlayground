@@ -9,7 +9,7 @@ Shader "Unlit/ScreenCutoutShader"
 	SubShader
 	{
 		Tags{ /*"Queue" = "Transparent" "IgnoreProjector" = "True"*/ "RenderType" = "Opaque" }
-		//Lighting Off
+		Lighting Off
 		Cull Off
 		Offset -1,-1
 		//ZWrite On

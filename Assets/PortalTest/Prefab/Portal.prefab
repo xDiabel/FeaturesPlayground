@@ -111,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 1833131309429016416}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.5, y: 1.1, z: 0}
-  m_LocalScale: {x: 0.2, y: 2.2, z: 0.3}
+  m_LocalScale: {x: 0.2, y: 2.2, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1833131310212038423}
   m_RootOrder: 0
@@ -226,10 +226,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0701b4693a7f54e43b9a2857d078493e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linkedPortal: {fileID: 0}
+  linkedPortal: {fileID: 1833131310019358937}
   screenRenderer: {fileID: 1105758377733127700}
   portalCamera: {fileID: 1833131309353260301}
-  nearClipOffset: 0.3
+  nearClipOffset: 0.2
   nearClipLimit: 0.2
   trackedTravellers: []
 --- !u!65 &675157566109590272
@@ -243,7 +243,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 0.7}
+  m_Size: {x: 1, y: 2, z: 0.5}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1833131310062158078
 GameObject:
@@ -273,7 +273,7 @@ Transform:
   m_GameObject: {fileID: 1833131310062158078}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.5, y: 1.1, z: 0}
-  m_LocalScale: {x: 0.2, y: 2.2, z: 0.3}
+  m_LocalScale: {x: 0.2, y: 2.2, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1833131310212038423}
   m_RootOrder: 1
@@ -365,7 +365,7 @@ Transform:
   m_GameObject: {fileID: 1833131310212038422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0.1}
   m_Children:
   - {fileID: 1833131309429016417}
   - {fileID: 1833131310062158079}
@@ -401,7 +401,7 @@ Transform:
   m_GameObject: {fileID: 1833131310785956529}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.1, z: 0}
-  m_LocalScale: {x: 1, y: 0.2, z: 0.3}
+  m_LocalScale: {x: 1, y: 0.2, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1833131310212038423}
   m_RootOrder: 2

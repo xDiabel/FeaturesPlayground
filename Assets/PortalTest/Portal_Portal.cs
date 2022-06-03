@@ -17,7 +17,6 @@ public class Portal_Portal : MonoBehaviour
 
     Camera playerCamera = null;
     RenderTexture viewTexture = null;
-    Vector3 reverseVector = new Vector3(-1, 1, -1);
     float distToNearClip = 0.0f;
 
     bool IsValid => linkedPortal && playerCamera;
@@ -69,20 +68,11 @@ public class Portal_Portal : MonoBehaviour
         float _halfWidth = _halfHeight * playerCamera.aspect;
         distToNearClip = new Vector3(_halfWidth, _halfHeight, playerCamera.nearClipPlane).magnitude;
 
+        //TEST
+
         screenRenderer.transform.localScale = new Vector3(screenRenderer.transform.localScale.x, screenRenderer.transform.localScale.y, distToNearClip);
     }
 
-    void ProtectScreenFromClipping()
-    {
-        Transform _screenT = screenRenderer.transform;
-        bool _isCamFacingSameDirectionAsPortal = Vector3.Dot(transform.forward, transform.position - playerCamera.transform.position) > 0;
-        
-        Vector3 _newPos = new Vector3(0,1, (Vector3.forward * distToNearClip * (_isCamFacingSameDirectionAsPortal ? nearClipOffset : -nearClipOffset)).z);
-        //Vector3 _newPosTest = Vector3.Scale(_newPos, new Vector3(1, 1, -1));
-       
-        _screenT.localPosition = _newPos;
-        //linkedPortal.ScreenRenderer.transform.localPosition = _newPosTest;
-    }
 
     #region Render 
 
@@ -127,26 +117,8 @@ public class Portal_Portal : MonoBehaviour
 
         screenRenderer.enabled = true;
     }
-    /*
-    Vector3 GetPortalCameraPosition()
-    {
-        //get pos by local/not world
-        Vector3 _relativePosition = transform.InverseTransformPoint(playerCamera.transform.position);
 
-        //inverse x/z, not y
-        _relativePosition = Vector3.Scale(_relativePosition, reverseVector);
-
-        return linkedPortal.transform.TransformPoint(_relativePosition);
-    }
-
-    Vector3 GetPortalCameraForward()
-    {
-        Vector3 _relativeRotation= transform.InverseTransformDirection(playerCamera.transform.forward);
-        return Vector3.Scale(_relativeRotation, reverseVector);
-    }
-    */
-
-    //TEST
+    //TEST, Find it, not mine
     // Use custom projection matrix to align portal camera's near clip plane with the surface of the portal
     // Note that this affects precision of the depth buffer, which can cause issues with effects like screenspace AO
     void SetNearClipPlane()
@@ -173,6 +145,21 @@ public class Portal_Portal : MonoBehaviour
         {
             portalCamera.projectionMatrix = playerCamera.projectionMatrix;
         }
+    }
+
+
+    void ProtectScreenFromClipping()
+    {
+        Transform _screenT = screenRenderer.transform;
+        bool _isCamFacingSameDirectionAsPortal = Vector3.Dot(transform.forward, transform.position - playerCamera.transform.position) > 0;
+
+        float _newZ = distToNearClip * (_isCamFacingSameDirectionAsPortal ? nearClipOffset : -nearClipOffset) * 2;
+        Vector3 _newPos = new Vector3(0, 1, _newZ);
+        Vector3 _newPosLinked = new Vector3(0, 1, -_newZ);
+
+        _screenT.localPosition = _newPos;
+        //reverse
+        linkedPortal.ScreenRenderer.transform.localPosition = _newPosLinked;
     }
 
     #endregion
@@ -220,12 +207,6 @@ public class Portal_Portal : MonoBehaviour
 
     void TeleportTraveller(Portal_PortalTraveller _traveller, Transform _travellerTransform, ref int _indexTraveller)
     {
-        /*
-        _travellerTransform.position = GetPortalCameraPosition();
-        _travellerTransform.forward = GetPortalCameraForward();
-        _traveller.Teleport(transform, linkedPortal.transform, _travellerTransform.position, _travellerTransform.rotation);
-        */
-
         Matrix4x4 _m = linkedPortal.transform.localToWorldMatrix * transform.worldToLocalMatrix * _travellerTransform.localToWorldMatrix;
         _traveller.Teleport(transform, linkedPortal.transform, _m.GetColumn(3), _m.rotation);
 

@@ -12,8 +12,12 @@ public class Portal_PortalTraveller : MonoBehaviour
 
     public virtual void Teleport(Transform _from, Transform _to, Vector3 _pos, Quaternion _rot)
     {
+
+        //test with little push forward
+
         transform.position = _pos;
         transform.rotation = _rot;
+
     }
 
     public virtual void EnterPortalThreshold()
